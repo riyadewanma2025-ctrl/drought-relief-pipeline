@@ -1,22 +1,78 @@
-# Drought Relief Pipeline (ECO6810)
+# Drought Relief Pipeline
 
-This project builds a scalable data pipeline for processing drought-relief claims.
+A scalable data pipeline for processing drought-relief claims, combining batch processing with real-time validation.
 
-## Key Concepts
-- Batch processing using pandas
-- Live validation using dict and set
-- Complexity analysis and optimization
-- Benchmarking performance
+---
 
-## Structure
-- Q1–Q3: Complexity and abstraction analysis
-- Q4: Batch payout table (pandas)
-- Q5: Live validation layer (dict/set)
-- Q6: Benchmarking and tool split
-- Q7–Q9: Evaluation, memo, and safe summary
+## Overview
 
-## Key Insight
-Batch workflows should use pandas, while live validation requires lookup-based structures (dict/set) for scalability.
+This project simulates a government relief system where claims are processed in two stages:
+
+- **Batch Processing:** Prepare payout tables using pandas  
+- **Live Validation:** Validate incoming claims in real time using efficient data structures  
+
+The goal is to demonstrate how choosing the right tools (vectorized operations vs lookup-based structures) affects performance, scalability, and reliability.
+
+---
+
+## Key Features
+
+- Batch payout processing using pandas  
+- Real-time validation using dictionary and set lookups  
+- Duplicate detection and eligibility filtering  
+- District-level rule enforcement  
+- Performance benchmarking (slow vs optimized approaches)  
+- Safe aggregation with failure handling  
+
+---
+
+## Architecture
+
+| Component            | Tool Used       | Reason |
+|---------------------|---------------|--------|
+| Batch Processing     | pandas         | Efficient vectorized operations on large datasets |
+| Live Validation      | dict / set     | Constant-time (O(1)) lookups for streaming data |
+| Benchmarking         | Python timing  | Compare performance across approaches |
+| Aggregation          | Custom logic   | Robust handling of missing and duplicate data |
+
+---
+
+## Performance Insight
+
+The optimized live validator significantly outperforms the naive row-by-row approach by:
+- Avoiding repeated DataFrame scans  
+- Using precomputed lookup structures  
+- Reducing complexity from linear scans to constant-time checks  
+
+---
+
+## Project Structure
+### Main implementation 
+drought_relief_pipeline.ipynb 
+### Project documentation
+README.md 
+
+
+---
+
+## Key Learnings
+
+- Batch and real-time systems require different abstractions  
+- pandas is powerful for bulk processing but inefficient for per-row streaming  
+- Lookup-based data structures (dict/set) are critical for real-time systems  
+- Clean separation between batch and live layers improves scalability and clarity  
+
+---
+
+## How to Run
+
+1. Open the notebook in Google Colab or Jupyter Notebook  
+2. Run all cells sequentially  
+3. Review outputs and benchmark comparisons  
+
+---
 
 ## Author
-Riya Dewan
+
+Riya Dewan  
+Ashoka University
